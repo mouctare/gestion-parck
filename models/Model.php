@@ -14,4 +14,17 @@ abstract class Model {
         }
         return self::$pdo;
     }
+
+ /**
+  * Formater les data en json
+  *
+  * @param [type] $info
+  * 
+  */
+    public static function sendJSON($info){
+        header("Access-Controll-Allow-Origin: *");
+        header("Content-Type-application/json");
+      echo json_encode($info);
+
+    }
 }

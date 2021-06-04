@@ -1,5 +1,7 @@
 <?php
 require_once "models/front/API.manager.php";
+require_once "models/Model.php";
+
 
 class APIController {
     private $apiManger;
@@ -9,9 +11,7 @@ class APIController {
     }
     public function getAnimaux(){
         $animaux = $this->apiManager->getDBAnimaux();
-        echo "<pre>";
-        print_r($animaux);
-        echo "</pre>";
+       
     }
 
     public function getAnimal($idAnimal){
@@ -24,15 +24,12 @@ class APIController {
 
     public function getContinents(){
         $continents = $this->apiManager->getDBContinents();
-        echo "<pre>";
-        print_r($continents);
-        echo "</pre>";
+        Model::sendJSON($continents);
     }
 
     public function getFamilles(){
         $familles = $this->apiManager->getDBFamilles();
-        echo "<pre>";
-        print_r($familles);
-        echo "</pre>";
+        Model::sendJSON($familles);
+     
     }
 }
