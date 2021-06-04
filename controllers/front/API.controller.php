@@ -15,14 +15,24 @@ class APIController {
     }
 
     public function getAnimal($idAnimal){
-        echo "les données JSON de l'aniaml ".$idAnimal." demandées";
+        $lignesAnimal = $this->apiManager->getDBAnimal($idAnimal);
+        echo "<pre>";
+        print_r($lignesAnimal);
+        echo "</pre>";
+        
     }
 
     public function getContinents(){
-        echo "les données JSON des continents  demandées";
+        $continents = $this->apiManager->getDBContinents();
+        echo "<pre>";
+        print_r($continents);
+        echo "</pre>";
     }
 
     public function getFamilles(){
-        echo "les données JSON des familles demandées";
+        $familles = $this->apiManager->getDBFamilles();
+        echo "<pre>";
+        print_r($familles);
+        echo "</pre>";
     }
 }
