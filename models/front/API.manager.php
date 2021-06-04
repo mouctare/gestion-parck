@@ -32,19 +32,7 @@ class  APIManager extends Model{
         $stmt->closeCursor();
         return $animaux;
     }
-    public function getContinentsAnimal($idAnimal){
-      
-      $req = "SELECT * 
-      from continent c inner join animal_continent ac on ac.continent_id = c.continent_id
-      WHERE ac.animal_id = :idAnimal
-      ";
-      $stmt = $this->getBdd()->prepare($req);
-      $stmt->bindValue(":idAnimal", $idAnimal, PDO::PARAM_INT);
-      $stmt->execute();
-      $continents= $stmt->fetchAll(PDO::FETCH_ASSOC);
-      $stmt->closeCursor();
-      return $continents;
-    }
+ 
  
      /**
       * Recupère un animal partuiculier

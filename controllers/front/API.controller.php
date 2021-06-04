@@ -23,45 +23,32 @@ class APIController {
     }
 
     private  function formatDataLignesAnimaux($lignes){
-        $tab = [];
-
-        $animaux = $this->apiManager->getDBAnimaux2();
-        $i = 0;
-        foreach ($animaux as $animal){
-            $continents = $this->apiManager->getContinentsAnimal($animal['animal_id']);
-            $animaux[$i]['continents'] = $continents;
-            $i++;
-        }
-        echo "<pre>";
-        print_r($animaux);
-        "</pre>";
-      
     // Tranformer les data en tableau multidimentionel
-    // $tab = [];
+   $tab = [];
         
-    // foreach($lignes as $ligne){
-    //     // Ici on récupère un animal avec sa famille et les continents dans lesquels il existe
-    //     if(!array_key_exists($ligne['animal_id'],$tab)){
-    //         $tab[$ligne['animal_id']] = [
-    //             "id" => $ligne['animal_id'],
-    //             "nom" => $ligne['animal_nom'],
-    //             "description" => $ligne['animal_description'],
-    //             "image" => $ligne['animal_image'],
-    //             "famille" => [
-    //                 "idFamille" => $ligne['famille_id'],
-    //                 "libelleFamille" => $ligne['famille_libelle'],
-    //                 "descriptionFamille" => $ligne['famille_description']
-    //             ]
-    //         ];
-    //     }
+    foreach($lignes as $ligne){
+        // Ici on récupère un animal avec sa famille et les continents dans lesquels il existe
+        if(!array_key_exists($ligne['animal_id'],$tab)){
+            $tab[$ligne['animal_id']] = [
+                "id" => $ligne['animal_id'],
+                "nom" => $ligne['animal_nom'],
+                "description" => $ligne['animal_description'],
+                "image" => $ligne['animal_image'],
+                "famille" => [
+                    "idFamille" => $ligne['famille_id'],
+                    "libelleFamille" => $ligne['famille_libelle'],
+                    "descriptionFamille" => $ligne['famille_description']
+                ]
+            ];
+        }
            
-    //     $tab[$ligne['animal_id']]['continents'][] = [
-    //         "idContinent" => $ligne['continent_id'],
-    //         "libelleContinent" => $ligne['continent_libelle']
-    //     ];
-    // }
+        $tab[$ligne['animal_id']]['continents'][] = [
+            "idContinent" => $ligne['continent_id'],
+            "libelleContinent" => $ligne['continent_libelle']
+        ];
+    }
 
-    // return $tab;
+    return $tab;
 
   }
 
