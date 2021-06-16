@@ -5,6 +5,7 @@ require "./models/back/admin.manager.php";
 
 class AdminController{
     private $adminManager;
+
     public function __construct()
     {
         $this->adminManager = new AdminManager(); 
@@ -15,8 +16,7 @@ class AdminController{
     }
 
     public function connexion(){
-      //  echo password_hash("admin09", PASSWORD_DEFAULT);
-       // echo "connexion";
+    
        if(!empty($_POST['login'] ) && !empty($_POST['password'])){
         $login =  Securite::secureHTML($_POST['login']);
         $password =  Securite::secureHTML($_POST['password']);
@@ -32,7 +32,7 @@ class AdminController{
 
     public function getAccueilAdmin(){
         if(Securite::verifAccessSession()){
-            require_once "views/admin.view.php";
+            require_once "views/accueilAdmin.view.php";
         } else {
            header('Location: '.URL."back/login"); 
         }

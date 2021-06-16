@@ -15,6 +15,6 @@ class AdminManager extends Model{
     }
     public function isConnexionValid($login, $password){
         $passwordBD = $this->getPasswordUser($login);
-        return password_verify($passwordBD);
+        return password_verify($password, $passwordBD);
     }
 }

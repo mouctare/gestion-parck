@@ -43,9 +43,7 @@ try{
                 }
             break;
             case "back" :
-                
-             
-                switch($url[1]){
+                 switch($url[1]){
                     case "login" : $adminController->getPageLogin();
                     break;
                     case "connexion" : $adminController->connexion();
