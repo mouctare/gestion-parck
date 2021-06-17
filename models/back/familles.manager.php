@@ -57,4 +57,18 @@ class FamillesManager extends Model{
         $stmt->execute();
         $stmt->closeCursor();
     }
+    /**
+     * Création d'une famille
+     */
+    public function createFamille($libelle, $description){
+        $req ="Insert into famille (famille_libelle, famille_description)
+        values (:libelle, :description)
+        ";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":libelle",$libelle,PDO::PARAM_STR);
+        $stmt->bindValue(":description",$description,PDO::PARAM_STR);
+        $stmt->execute();
+        $stmt->closeCursor();
+        return $this->getBdd()->lastInsertId();
+    }
 }
