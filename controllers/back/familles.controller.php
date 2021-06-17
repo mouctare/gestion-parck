@@ -17,8 +17,37 @@ class FamillesController{
             require_once "views/famillesVisualisation.view.php";
 
         } else{
-              throw  new Exception("Vous n'avez pas le droit d'etre là barrez bous");
+              throw  new Exception("Vous n'avez pas le droit d'etre là barrez vous");
         }
 
     }
+
+    public function suppression(){
+        if(Securite::verifAccessSession()){
+            $_SESSION['alert'] = [
+                "message" => "La famille a bien été supprimée",
+                "type" => "alert-success"
+            ];
+            
+            $idFamille = (int) Securite::secureHTML($_POST['famille_id']);
+
+            if($this->famillesManager->compterAnimaux($idFamille) > 0){
+                $_SESSION['alert'] = [
+                    "message" => "Vous ne pouvez pas supprimé une famille qui a des animaux",
+                    "type" => "alert-danger"
+                ]; 
+            } else {
+                $this->famillesManager->deleteDBfamille($idFamille);
+                $_SESSION['alert'] = [
+                    "message" => "La famille a bien été supprimée",
+                    "type" => "alert-success"
+                ]; 
+            }
+           
+           header('Location: '.URL. 'back/familles/visualisation');
+        } else {
+            throw  new Exception("Vous n'avez pas le droit d'etre là barrez vous"); 
+        }
+    }
+    
 }

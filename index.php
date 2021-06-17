@@ -56,6 +56,8 @@ try{
                         switch($url[2]){
                             case "visualisation" : $famillesController->visualisation();
                             break;
+                            case "validationSuppression" : $famillesController->suppression();
+                            break;
                             case "creation" : echo "creation des animaux";
                             break;
                             default : throw new Exception ("La page n'existe pas");
