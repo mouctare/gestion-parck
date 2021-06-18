@@ -1,11 +1,9 @@
 <?php
 
-
 require_once "models/Model.php";
 
 class FamillesManager extends Model{
-    public function getFamilles()
-    {
+    public function getFamilles(){
         $req = "SELECT * from famille";
         $stmt = $this->getBdd()->prepare($req);
         $stmt->execute();
@@ -14,12 +12,6 @@ class FamillesManager extends Model{
         return $familles;
     }
 
-  
-/**
- * Supprimer une famille
- *
- * 
- */
     public function deleteDBfamille($idFamille){
         $req ="Delete from famille where famille_id= :idFamille";
         $stmt = $this->getBdd()->prepare($req);
@@ -28,11 +20,6 @@ class FamillesManager extends Model{
         $stmt->closeCursor();
     }
 
-    /**
-     * Compter le nombre d'animaux dans une famille
-     *
-     * 
-     */
     public function compterAnimaux($idFamille){
         $req ="Select count(*) as 'nb'
         from famille f inner join animal a on a.famille_id = f.famille_id
@@ -44,10 +31,8 @@ class FamillesManager extends Model{
         $stmt->closeCursor();
         return $resultat['nb'];
     }
-    /**
-     * Modification d'une famille
-     */
-    public function updateFamille($idFamille, $libelle, $description){
+
+    public function updateFamille($idFamille,$libelle,$description){
         $req ="Update famille set famille_libelle = :libelle, famille_description = :description
         where famille_id= :idFamille";
         $stmt = $this->getBdd()->prepare($req);
@@ -57,12 +42,10 @@ class FamillesManager extends Model{
         $stmt->execute();
         $stmt->closeCursor();
     }
-    /**
-     * Création d'une famille
-     */
-    public function createFamille($libelle, $description){
-        $req ="Insert into famille (famille_libelle, famille_description)
-        values (:libelle, :description)
+
+    public function createFamille($libelle,$description){
+        $req ="Insert into famille (famille_libelle,famille_description)
+            values (:libelle,:description)
         ";
         $stmt = $this->getBdd()->prepare($req);
         $stmt->bindValue(":libelle",$libelle,PDO::PARAM_STR);
